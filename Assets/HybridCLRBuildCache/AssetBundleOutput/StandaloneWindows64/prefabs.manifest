@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 743219646
+CRC: 3932159265
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 0a51c6e5abb52ba0040c41884055c231
+    Hash: e9ac0489089ce508930fa41325c9950a
   TypeTreeHash:
     serializedVersion: 2
-    Hash: ce87c1f57b5f11413c2d243bd8945fad
+    Hash: a6475a599c02e0f4e3080196d49ddfef
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -31,8 +31,11 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 2e9cda88224ec9c47a3f838b071b1352, type: 3}
 - Class: 115
   Script: {instanceID: 0}
+- Class: 135
+  Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/Prefabs/HotUpdatePrefab.prefab
+- Assets/Prefabs/Sphere.prefab
 - Assets/Prefabs/Cube.prefab
 Dependencies: []

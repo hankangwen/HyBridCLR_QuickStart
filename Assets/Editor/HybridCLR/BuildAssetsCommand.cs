@@ -40,6 +40,14 @@ namespace HybridCLR.Editor
             CopyABAOTHotUpdateDlls(target);
         }
         
+        [MenuItem("HybridCLR/Build/OnlyBuildABAndCopyToStreamingAssets")]
+        public static void OnlyBuildABAndCopyToStreamingAssets()
+        {
+            BuildTarget target = EditorUserBuildSettings.activeBuildTarget;
+            BuildAssetBundleByTarget(target);
+            CopyAssetBundlesToStreamingAssets(target);
+        }
+        
         public static void BuildAssetBundleByTarget(BuildTarget target)
         {
             BuildAssetBundles(GetAssetBundleTempDirByTarget(target), GetAssetBundleOutputDirByTarget(target), target);
@@ -65,6 +73,7 @@ namespace HybridCLR.Editor
                 
                 prefabAssets.Add($"{Application.dataPath}/Prefabs/Cube.prefab");
                 prefabAssets.Add($"{Application.dataPath}/Prefabs/HotUpdatePrefab.prefab");
+                prefabAssets.Add($"{Application.dataPath}/Prefabs/Sphere.prefab");
                 
                 AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
                 abs.Add(new AssetBundleBuild
@@ -90,7 +99,11 @@ namespace HybridCLR.Editor
             string streamingAssetPathDst = Application.streamingAssetsPath;
             Directory.CreateDirectory(streamingAssetPathDst);
             string outputDir = GetAssetBundleOutputDirByTarget(target);
-            var abs = new string[] { "prefabs" };
+            var abs = new string[]
+            {
+                "prefabs"
+            };
+            
             foreach (var ab in abs)
             {
                 string srcAb = ToRelativeAssetPath($"{outputDir}/{ab}");

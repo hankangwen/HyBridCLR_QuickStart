@@ -44,7 +44,8 @@ public class LoadDll : MonoBehaviour
         // type.GetMethod("Start").Invoke(null, null);
         
         //官方推荐：通过初始化从打包成assetbundle的prefab或者scene还原挂载的热更新脚本
-        AssetBundle prefabAb = AssetBundle.LoadFromMemory(CommonTool.ReadBytesFromStreamingAssets("prefabs"));
+        // AssetBundle prefabAb = AssetBundle.LoadFromMemory(CommonTool.ReadBytesFromStreamingAssets("prefabs"));
+        AssetBundle prefabAb = AssetBundleMgr.LoadFromMemory("prefabs");
         GameObject hotUpdatePrefab = prefabAb.LoadAsset<GameObject>("HotUpdatePrefab.prefab");
         GameObject.Instantiate(hotUpdatePrefab);
     }
