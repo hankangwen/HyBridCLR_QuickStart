@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Print : MonoBehaviour
 {
-    public int value = 1;
+    public int value = 2;
 
     void Start()
     {
