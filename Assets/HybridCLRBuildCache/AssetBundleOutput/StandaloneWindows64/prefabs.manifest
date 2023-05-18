@@ -1,0 +1,35 @@
+ManifestFileVersion: 0
+CRC: 2989743783
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: a83e4a2f562afcc93382182e62a0de48
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 977edab115c5795c1e71d0211cf05cf1
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 65
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 89f4083a1eb49db4093e47c07ee70c54, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Prefabs/Cube.prefab
+Dependencies: []

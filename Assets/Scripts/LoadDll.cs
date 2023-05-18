@@ -13,6 +13,18 @@ public class LoadDll : MonoBehaviour
 {
     void Start()
     {
+        StartGame();
+    }
+    
+    public static byte[] ReadBytesFromStreamingAssets(string file)
+    {
+        // // Android平台不支持直接读取StreamingAssets下文件，请自行修改实现
+        // return File.ReadAllBytes($"{Application.streamingAssetsPath}/{file}");
+        return CommonTool.ReadBytesFromStreamingAssets(file);
+    }
+    
+    void StartGame()
+    {
         // 先补充元数据
         LoadMetadataForAOTAssemblies();
         // Editor环境下，HotUpdate.dll.bytes已经被自动加载，不需要加载，重复加载反而会出问题。
@@ -24,8 +36,8 @@ public class LoadDll : MonoBehaviour
 #endif
         
         // 1.通过反射调用热更新代码
-        Type type = hotUpdateAss.GetType("Hello");
-        type.GetMethod("Run").Invoke(null, null);
+        Type type = hotUpdateAss.GetType("Entry");
+        type.GetMethod("Start").Invoke(null, null);
     }
     
     /// <summary>
@@ -34,7 +46,7 @@ public class LoadDll : MonoBehaviour
     /// </summary>
     private static void LoadMetadataForAOTAssemblies()
     {
-        List<string> aotDllList = new List<string>
+        List<string> aotMetaAssemblyFiles = new List<string>
         {
             "mscorlib.dll",
             "System.dll",
@@ -46,12 +58,12 @@ public class LoadDll : MonoBehaviour
         // 注意，补充元数据是给AOT dll补充元数据，而不是给热更新dll补充元数据。
         // 热更新dll不缺元数据，不需要补充，如果调用LoadMetadataForAOTAssembly会返回错误
         HomologousImageMode mode = HomologousImageMode.SuperSet;
-        foreach (var aotDllName in aotDllList)
+        foreach (var aotDllName in aotMetaAssemblyFiles)
         {
-            byte[] dllBytes = File.ReadAllBytes($"{Application.streamingAssetsPath}/{aotDllName}.bytes");
+            byte[] dllBytes = ReadBytesFromStreamingAssets(aotDllName + ".bytes");
             // 加载assembly对应的dll，会自动为它hook。一旦aot泛型函数的native函数不存在，用解释器版本代码
             LoadImageErrorCode err = HybridCLR.RuntimeApi.LoadMetadataForAOTAssembly(dllBytes, mode);
-            Debug.Log($"LoadMetadataForAOTAssembly:{aotDllName}. ret:{err}");
+            Debug.Log($"LoadMetadataForAOTAssembly:{aotDllName}. mode:{mode} ret:{err}");
         }
     }
 }
