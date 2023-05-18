@@ -23,20 +23,23 @@ public class LoadDll : MonoBehaviour
         return CommonTool.ReadBytesFromStreamingAssets(file);
     }
     
+    private static Assembly _hotUpdateAss;
     void StartGame()
     {
         // 先补充元数据
         LoadMetadataForAOTAssemblies();
+        
+        // TODO:此处应该有热更流程
+        
         // Editor环境下，HotUpdate.dll.bytes已经被自动加载，不需要加载，重复加载反而会出问题。
 #if !UNITY_EDITOR
-        Assembly hotUpdateAss = Assembly.Load(File.ReadAllBytes($"{Application.streamingAssetsPath}/HotUpdate.dll.bytes"));
+        _hotUpdateAss = Assembly.Load(ReadBytesFromStreamingAssets("HotUpdate.dll.bytes"));
 #else
-        // Editor下无需加载，直接查找获得HotUpdate程序集
-        Assembly hotUpdateAss = System.AppDomain.CurrentDomain.GetAssemblies().First(a => a.GetName().Name == "HotUpdate");
+        _hotUpdateAss = System.AppDomain.CurrentDomain.GetAssemblies().First(a => a.GetName().Name == "HotUpdate");
 #endif
         
-        // 1.通过反射调用热更新代码
-        Type type = hotUpdateAss.GetType("Entry");
+        // 通过反射调用热更新代码
+        Type type = _hotUpdateAss.GetType("Entry");
         type.GetMethod("Start").Invoke(null, null);
     }
     
