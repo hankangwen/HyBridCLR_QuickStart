@@ -14,19 +14,19 @@ public static class Entry
         
         // 2.将脚本挂载到热更新资源
         // 挂载热更新脚本的资源（场景或prefab）必须打包成ab，在实例化资源前先加载热更新dll即可
-        Run_InstantiateComponentByAsset();
+        // Run_InstantiateComponentByAsset();
         
         // 3.使用AOT中没有实例化过的AOT泛型类或者函数
         Run_AOTGeneric();
     }
     
-    private static void Run_InstantiateComponentByAsset()
-    {
-        // 通过实例化assetbundle中的资源，还原资源上的热更新脚本
-        AssetBundle ab = AssetBundle.LoadFromMemory(CommonTool.ReadBytesFromStreamingAssets("prefabs"));
-        GameObject cube = ab.LoadAsset<GameObject>("Cube");
-        GameObject.Instantiate(cube);
-    }
+    // private static void Run_InstantiateComponentByAsset()
+    // {
+    //     // 通过实例化assetbundle中的资源，还原资源上的热更新脚本
+    //     AssetBundle ab = AssetBundle.LoadFromMemory(CommonTool.ReadBytesFromStreamingAssets("prefabs"));
+    //     GameObject cube = ab.LoadAsset<GameObject>("Cube");
+    //     GameObject.Instantiate(cube);
+    // }
     
     
     struct MyVec3

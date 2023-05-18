@@ -60,8 +60,12 @@ namespace HybridCLR.Editor
             List<AssetBundleBuild> abs = new List<AssetBundleBuild>();
             {
                 var prefabAssets = new List<string>();
-                string testPrefab = $"{Application.dataPath}/Prefabs/Cube.prefab";
-                prefabAssets.Add(testPrefab);
+                // string testPrefab = $"{Application.dataPath}/Prefabs/Cube.prefab";
+                // prefabAssets.Add(testPrefab);
+                
+                prefabAssets.Add($"{Application.dataPath}/Prefabs/Cube.prefab");
+                prefabAssets.Add($"{Application.dataPath}/Prefabs/HotUpdatePrefab.prefab");
+                
                 AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
                 abs.Add(new AssetBundleBuild
                 {

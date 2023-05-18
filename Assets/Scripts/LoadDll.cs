@@ -32,6 +32,7 @@ public class LoadDll : MonoBehaviour
         // TODO:此处应该有热更流程
         
         // Editor环境下，HotUpdate.dll.bytes已经被自动加载，不需要加载，重复加载反而会出问题。
+        // 如果有多个热更新dll，请一定要按照依赖顺序加载，先加载被依赖的assembly。
 #if !UNITY_EDITOR
         _hotUpdateAss = Assembly.Load(ReadBytesFromStreamingAssets("HotUpdate.dll.bytes"));
 #else
@@ -39,8 +40,13 @@ public class LoadDll : MonoBehaviour
 #endif
         
         // 通过反射调用热更新代码
-        Type type = _hotUpdateAss.GetType("Entry");
-        type.GetMethod("Start").Invoke(null, null);
+        // Type type = _hotUpdateAss.GetType("Entry");
+        // type.GetMethod("Start").Invoke(null, null);
+        
+        //官方推荐：通过初始化从打包成assetbundle的prefab或者scene还原挂载的热更新脚本
+        AssetBundle prefabAb = AssetBundle.LoadFromMemory(CommonTool.ReadBytesFromStreamingAssets("prefabs"));
+        GameObject hotUpdatePrefab = prefabAb.LoadAsset<GameObject>("HotUpdatePrefab.prefab");
+        GameObject.Instantiate(hotUpdatePrefab);
     }
     
     /// <summary>
