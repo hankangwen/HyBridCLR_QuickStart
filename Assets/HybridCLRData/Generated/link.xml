@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <linker>
-  <assembly fullname="CommonTool">
-    <type fullname="AssetBundleMgr" preserve="all" />
+  <assembly fullname="CommonUtil">
+    <type fullname="KGFramework.AssetBundleMgr" preserve="all" />
   </assembly>
   <assembly fullname="mscorlib">
     <type fullname="System.Collections.Generic.List`1" preserve="all" />

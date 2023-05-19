@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HotUpdateMain : MonoBehaviour
+namespace HotUpdate
 {
-    private void Awake()
+    public class HotUpdateMain : MonoBehaviour
     {
-        Entry.Start();
-        GameObject.Destroy(this.gameObject);
+        private void Awake()
+        {
+            Entry.Start();
+            GameObject.Destroy(this.gameObject);
+        }
     }
 }

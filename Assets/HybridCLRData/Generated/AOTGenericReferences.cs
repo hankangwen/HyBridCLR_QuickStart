@@ -11,7 +11,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// }} 
 
 	// {{ AOT generic types
-	// System.Collections.Generic.List<Entry.MyVec3>
+	// System.Collections.Generic.List<HotUpdate.Entry.MyVec3>
 	// }}
 
 	public void RefMethods()
